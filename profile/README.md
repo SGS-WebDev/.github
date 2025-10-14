@@ -51,46 +51,14 @@ Key features:
 - Facilitates testing of applications behind a reverse proxy
 - Easily configurable through environment variables
 
-### 6. [SGS Dotfiles](https://github.com/SGS-WebDev/sgs-dotfiles)
-
-Contains configuration files and scripts for setting up consistent development environments across the team. This repository helps ensure that all developers have a standardized setup, reducing "works on my machine" issues.
-
-### 7. [SGS Terraform](https://github.com/SGS-WebDev/sgs-terraform)
-
-Houses Terraform configurations for managing SGS infrastructure as code, ensuring consistent and reproducible infrastructure setups. This allows for version-controlled infrastructure changes and easy replication of environments.
-
-### 8. [SGS Vagrantfiles](https://github.com/SGS-WebDev/sgs-vagrantfiles)
-
-Contains Vagrantfiles used with machine images built for development environments. It facilitates the creation and management of development environments using VMware vSphere.
-
-Key features:
-- Easy setup of development environments
-- Consistent configuration across team members
-- Integration with VMware vSphere for cloud-based development
-
-### 9. [SGS Packer Builds](https://github.com/SGS-WebDev/sgs-packer-builds)
-
-This repository contains Packer configurations for building and updating SGS IT's vagrant and vsphere boxes. These boxes serve as the base for the development and production environments where the web applications run.
-
-Key features:
-- Automated building of development and production environments
-- Consistent base configuration across all environments
-- Easy updates and maintenance of base boxes
-
 ## How It All Fits Together
 
 1. The **SGS Applications** repository serves as the core of our web services, providing centralized functionality and integration points for other applications.
 
-2. Developers use **SGS Dotfiles** to set up their local development environment with all necessary tools and configurations.
+2. Within this environment, they use the **SGS Web Application Template** to create new web applications or work on existing ones like **SGS Check-In** and **SGS Transportation**.
 
-3. They then use the **SGS Vagrantfiles** to create a development environment using the boxes created by the **SGS Packer Builds** configurations.
+3. These applications are then deployed using Docker, managed by Portainer (set up using the **SGS Portainer** repository).
 
-4. Within this environment, they use the **SGS Web Application Template** to create new web applications or work on existing ones like **SGS Check-In** and **SGS Transportation**.
-
-5. These applications are then deployed using Docker, managed by Portainer (set up using the **SGS Portainer** repository).
-
-6. **SGS Nginx** acts as a reverse proxy, routing traffic to these applications in both development and production environments.
-
-7. **SGS Terraform** is used to manage and provision the infrastructure that hosts these applications, ensuring consistency across different environments.
+4. **SGS Nginx** acts as a reverse proxy, routing traffic to these applications in both development and production environments.
 
 This ecosystem allows for a standardized, easily manageable development and deployment process across the SGS web development team. It provides tools for local development, containerization, orchestration, and production deployment, all working together seamlessly. This setup ensures consistency across environments, from a developer's local machine to the production servers, facilitating efficient development, testing, and deployment of web applications at St. George's School.

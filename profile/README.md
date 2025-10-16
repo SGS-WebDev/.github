@@ -73,4 +73,4 @@ Key features:
 
 4. **SGS Nginx** acts as a reverse proxy, routing traffic to these applications in both development and production environments.
 
-This ecosystem allows for a standardized, easily manageable development and deployment process across the SGS web development team. It provides tools for local development, containerization, orchestration, and production deployment, all working together seamlessly. This setup ensures consistency across environments, from a developer's local machine to the production servers, facilitating efficient development, testing, and deployment of web applications at St. George's School.
+This ecosystem allows for a standardized, easily manageable development and deployment process across the SGS web development team. It provides tools for local development, containerization, orchestration, and production deployment.

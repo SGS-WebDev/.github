@@ -51,6 +51,18 @@ Key features:
 - Facilitates testing of applications behind a reverse proxy
 - Easily configurable through environment variables
 
+### 6. [SGS Blueprints](https://github.com/SGS-WebDev/sgs-blueprints)
+
+Infrastructure-as-code repository for automated provisioning and configuration of SGS servers.
+This repository contains image builder configurations and first-boot automation scripts that set up RHEL 9.6 systems from initial boot through full deployment.
+
+Key features:
+- Automated first-boot configuration for new server instances
+- VMware integration with hostname-based network configuration
+- GitHub deploy key management for repository access
+- Ansible-based configuration management
+- Status tracking and MOTD integration for deployment visibility
+
 ## How It All Fits Together
 
 1. The **SGS Applications** repository serves as the core of our web services, providing centralized functionality and integration points for other applications.

@@ -63,6 +63,26 @@ Key features:
 - Ansible-based configuration management
 - Status tracking and MOTD integration for deployment visibility
 
+### 7. [PS Google Calendar Sync](https://github.com/SGS-WebDev/sgs-ps-gcal-sync)
+
+Syncs PowerSchool course sections to Google Workspace resource calendars (rooms). Pulls section data from PowerSchool's Oracle database, collapses meetings into recurring entries in PostgreSQL, and reconciles Google Calendar events to match.
+
+Key features:
+- Fully Dockerized pipeline: FastAPI dashboard, Celery workers, PostgreSQL
+- Batched Google Calendar reconciliation via the `BatchHttpRequest` API
+- CLI-first design with a web UI convenience layer over the same command services
+- Deployment profiles for dev (Docker Compose), stage, and prod (Portainer)
+
+### 8. [SGS PowerSchool](https://github.com/SGS-WebDev/sgs-powerschool)
+
+Version-controlled home for St. George's PowerSchool reports and SQL queries. Connects read-only to the PowerSchool SIS Oracle database, preserving reporting knowledge as runnable, documented SQL.
+
+Key features:
+- `psq.py` CLI runner with parameter substitution, CSV export, and row limits
+- All 308 sqlReports backed up and ported to clean, organized `.sql` files
+- Read-only by design — the database account has SELECT-only grants
+- Reference documentation: connection setup, glossary, grades and work habits, reporting calendar
+
 ## How It All Fits Together
 
 1. The **SGS Applications** repository serves as the core of our web services, providing centralized functionality and integration points for other applications.
@@ -72,5 +92,7 @@ Key features:
 3. These applications are then deployed using Docker, managed by Portainer (set up using the **SGS Portainer** repository).
 
 4. **SGS Nginx** acts as a reverse proxy, routing traffic to these applications in both development and production environments.
+
+5. Alongside the web ecosystem, **PS Google Calendar Sync** and **SGS PowerSchool** integrate with the PowerSchool SIS — the former keeping Google Workspace room calendars in sync with course schedules, the latter serving as the version-controlled home for reporting SQL.
 
 This ecosystem allows for a standardized, easily manageable development and deployment process across the SGS web development team. It provides tools for local development, containerization, orchestration, and production deployment.

@@ -25,15 +25,11 @@ This repository serves as the foundation for new web applications at SGS. It pro
 - React-based Kiosk application
 - Standardized tooling and configuration
 
-### 2. [SGS Check-In Application](https://github.com/SGS-WebDev/sgs-webint-check-in)
+### 2. [SGS Transportation Application](https://github.com/SGS-WebDev/sgs-webint-transportation)
 
-A specialized application for managing check-ins at SGS, built using the SGS Web Application Template. This application demonstrates how individual services can be built and integrated with the core SGS Applications system.
+The SGS bus boarding application, built using the SGS Web Application Template. Students check in to a bus run at a kiosk by scanning their RFID badge or typing their name, and staff view boarding reports in the web UI.
 
-### 3. [SGS Transportation Application](https://github.com/SGS-WebDev/sgs-webint-transportation)
-
-An application for managing transportation services at SGS, also built using the SGS Web Application Template. Another example of a specialized service integrated with the core system.
-
-### 4. [SGS Portainer](https://github.com/SGS-WebDev/sgs-portainer)
+### 3. [SGS Portainer](https://github.com/SGS-WebDev/sgs-portainer)
 
 This repository sets up Portainer, a Docker management tool, for easy deployment and management of Docker environments across SGS servers.
 
@@ -42,16 +38,16 @@ Key features:
 - Consistent network configuration
 - Easy setup and deployment process
 
-### 5. [SGS Nginx](https://github.com/SGS-WebDev/sgs-nginx)
+### 4. [SGS Nginx Proxy](https://github.com/SGS-WebDev/sgs-nginx-proxy)
 
-Provides a flexible reverse proxy setup for both development and production environments.
+The reverse proxy in front of the applications on SGS web servers. Nginx runs directly on each host and is deployed with Ansible.
 
 Key features:
-- Consistent proxy configuration across environments
-- Facilitates testing of applications behind a reverse proxy
-- Easily configurable through environment variables
+- One configuration file per site, enabled and disabled with a helper script
+- Shared snippets for TLS, proxy headers, WebSocket support and security headers
+- A maintenance page for any request that doesn't match a site
 
-### 6. [SGS Blueprints](https://github.com/SGS-WebDev/sgs-blueprints)
+### 5. [SGS Blueprints](https://github.com/SGS-WebDev/sgs-blueprints)
 
 Infrastructure-as-code repository for automated provisioning and configuration of SGS servers.
 This repository contains image builder configurations and first-boot automation scripts that set up RHEL 9.6 systems from initial boot through full deployment.
@@ -62,6 +58,15 @@ Key features:
 - GitHub deploy key management for repository access
 - Ansible-based configuration management
 - Status tracking and MOTD integration for deployment visibility
+
+### 6. [SGS Fleet](https://github.com/SGS-WebDev/sgs-fleet)
+
+Health monitoring for the servers built by SGS Blueprints.
+
+Key features:
+- Host agents reporting on containers, scheduled jobs, backups and patching
+- Website and certificate checks for the web applications
+- Prometheus alert rules and a daily digest
 
 ### 7. [PS Google Calendar Sync](https://github.com/SGS-WebDev/sgs-ps-gcal-sync)
 
@@ -83,16 +88,27 @@ Key features:
 - Read-only by design — the database account has SELECT-only grants
 - Reference documentation: connection setup, glossary, grades and work habits, reporting calendar
 
+### 9. [SGS Data Sync](https://github.com/SGS-WebDev/sgs-datasync)
+
+The replacement for the legacy data sync between PowerSchool, Blackbaud and SGS Applications. Every weekday morning it builds the same tables the legacy sync writes and compares the two, without changing the live data yet.
+
+Key features:
+- Self-contained Docker Compose stack
+- Scheduled jobs for the nightly build, new-student intake and contacts, all report-only for now
+- A recorded comparison for every run
+
 ## How It All Fits Together
 
 1. The **SGS Applications** repository serves as the core of our web services, providing centralized functionality and integration points for other applications.
 
-2. Within this environment, they use the **SGS Web Application Template** to create new web applications or work on existing ones like **SGS Check-In** and **SGS Transportation**.
+2. New web applications start from the **SGS Web Application Template**; **SGS Transportation** was built this way.
 
 3. These applications are then deployed using Docker, managed by Portainer (set up using the **SGS Portainer** repository).
 
-4. **SGS Nginx** acts as a reverse proxy, routing traffic to these applications in both development and production environments.
+4. **SGS Nginx Proxy** acts as the reverse proxy on each server, routing traffic to these applications.
 
-5. Alongside the web ecosystem, **PS Google Calendar Sync** and **SGS PowerSchool** integrate with the PowerSchool SIS — the former keeping Google Workspace room calendars in sync with course schedules, the latter serving as the version-controlled home for reporting SQL.
+5. **SGS Blueprints** builds the servers and **SGS Fleet** monitors their health.
+
+6. Alongside the web ecosystem, **PS Google Calendar Sync**, **SGS PowerSchool** and **SGS Data Sync** integrate with the PowerSchool SIS — keeping Google Workspace room calendars in sync with course schedules, serving as the version-controlled home for reporting SQL, and replacing the legacy data sync.
 
 This ecosystem allows for a standardized, easily manageable development and deployment process across the SGS web development team. It provides tools for local development, containerization, orchestration, and production deployment.
